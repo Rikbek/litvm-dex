@@ -1,0 +1,17 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: linear-gradient(135deg, #0a1428 0%, #1a2338 100%);
+}
+
+.nav-link {
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(59, 130, 246, 0.15);
+  transform: translateX(8px);
+}
