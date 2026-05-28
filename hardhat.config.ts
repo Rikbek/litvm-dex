@@ -6,14 +6,13 @@ dotenv.config();
 
 const config: HardhatUserConfig = {
   solidity: "0.8.20",
+  defaultNetwork: "litvm",
 
   networks: {
     litvm: {
       url: "https://liteforge.rpc.caldera.xyz/http",
       chainId: 4441,
-      accounts: process.env.PRIVATE_KEY
-        ? [process.env.PRIVATE_KEY]
-        : [],
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
   },
 };
