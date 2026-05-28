@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "./veLitVM.sol";
+import "./veLVD.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Voter is Ownable {
-    veLitVM public immutable veLitVMContract;
-    IERC20 public immutable litvmToken;
+    veLVD public immutable veLVDContract;
+    IERC20 public immutable lvdToken;
 
     struct PoolInfo {
         address pool;
@@ -20,9 +20,9 @@ contract Voter is Ownable {
     event Voted(address indexed user, address indexed pool, uint256 votes);
     event PoolAdded(address pool);
 
-    constructor(address _veLitVM, address _litvmToken) Ownable(msg.sender) {
-        veLitVMContract = veLitVM(_veLitVM);
-        litvmToken = IERC20(_litvmToken);
+    constructor(address _veLVD, address _lvdToken) Ownable(msg.sender) {
+        veLVDContract = veLVD(_veLVD);
+        lvdToken = IERC20(_lvdToken);
     }
 
     function addPool(address _pool) external onlyOwner {
@@ -34,7 +34,7 @@ contract Voter is Ownable {
     function vote(address _pool, uint256 _amount) external {
         require(pools[_pool].pool != address(0), "Pool not found");
         
-        uint256 votingPower = veLitVMContract.votingPower(msg.sender);
+        uint256 votingPower = veLVDContract.votingPower(msg.sender);
         require(votingPower >= _amount, "Not enough voting power");
 
         // Kurangi vote lama jika ada
